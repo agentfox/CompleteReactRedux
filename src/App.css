@@ -32,13 +32,29 @@ button:focus {
   to { transform: rotate(360deg); }
 }
 
-.switch    {
+.App button    {
     background-color : green ;
     font: inherit ;
-    border-color: lightblue;
+    border:2px solid rgb(167, 133, 21);
+    border-radius: 5px;
     padding : 8px;
     color: white;
+    cursor: pointer;
   }
+.App button:hover   {
+  background-color : lightgreen ;
+  border:2px solid rgb(243, 112, 25);
+  color: black;
+}
+.App button.red    {
+  background-color : red ;  
+}
+.App button.red:hover    {
+  background-color : salmon ; 
+  color: black; 
+}
+
+
 .red {
   color : red;
 }

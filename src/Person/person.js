@@ -1,9 +1,9 @@
 import React from 'react';
-import './person.css'
+import classes from './person.css'
 const Person = (props) => {
     
     return (
-        <div className='Person' >
+        <div className={classes.Person} >
             <p onClick={props.click} >My name is {props.name} and I'm {props.age}</p>
             <input onChange={props.nameChanger} defaultValue={props.name} />
         </div>
