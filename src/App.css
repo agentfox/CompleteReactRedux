@@ -23,7 +23,6 @@
 }
 button:active {
   outline:0;
-  color: red;
 }
 button:focus {
   outline:0;
@@ -31,4 +30,18 @@ button:focus {
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.switch    {
+    background-color : green ;
+    font: inherit ;
+    border-color: lightblue;
+    padding : 8px;
+    color: white;
+  }
+.red {
+  color : red;
+}
+.bold {
+  font-weight: 300;
 }

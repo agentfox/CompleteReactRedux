@@ -1,0 +1,44 @@
+<div>
+    <p onClick={} >My name is {props.name} and I'm {props.age}</p>
+    <p>{props.children}</p>
+</div>
+
+
+ {/* constructor(props) {
+    super(props)
+
+    this.state = {
+      persons : [
+        {name:"SuperMan",age:"200"},
+        {name:"SuperGirl",age:"250"},
+        {name:"BatMan",age:"50"}
+      ],
+      otherState : "value"
+    }
+  } 
+
+   const style = {
+      backgroundColor: 'yellow',
+      font: 'inherit',
+      border: '2px solid orange',
+      borderRadius : '10px',
+      padding : '8px',
+      cursor: 'pointer'
+    } 
+
+    <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+            
+          />
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={()=>this.switchNameHandler('Dark-Seid')}
+            nameChanger={this.nameChanger}
+          />
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age} 
+          >This is the props.children</Person>
+        </div>   */}

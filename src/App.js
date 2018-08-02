@@ -1,79 +1,104 @@
-import React from 'react'; //<button style={style} onClick={this.switchNameHandler.bind(this,"Green-Latern")}>Switch</button>
+import React from 'react'; 
 import './App.css';
-import Person from './Person/person'
+import Person from './Person/person';
+
 class App extends React.Component {
 
   state = {
     persons : [
-      {name:"SuperMan",age:"200"},
-      {name:"SuperGirl",age:"250"},
-      {name:"BatMan",age:"50"}
+      {id:'d7g82',name:"SuperMan",age:"200"},
+      {id:'2jd89',name:"SuperGirl",age:"250"},
+      {id:'2d73g',name:"BatMan",age:"50"}
     ],
     otherState : "value",
     showPerson : false
   }
 
-  
 
-  switchNameHandler = (newName) => {
-    this.setState ({
-      persons : [
-        {name:newName,age:"200"},
-        {name:"Wonder-Woman",age:"250"},
-        {name:"Bat-Man",age:"50"}
-      ],
-      otherState : "value"
+  deletePersonHandler = (personId) => {  
+    const  persons =[...this.state.persons];
+    // variable persons shouldn't refer to the object persons in the state
+    // because when make change to the var person the obj person change along as well
+    // which causing change state -> re render so we use slice() to create a copy of
+    // object person in the state or you can use ES6 like above code
+    persons.splice(personId,1);                  
+    this.setState({ persons: persons })            
+  }
+
+
+
+  nameChanger = (event,id) => {
+    const personIndex = this.state.persons.findIndex(p=>{
+      return p.id ===id;
+    });
+    const theperson = { ...this.state.persons[personIndex] }; // to not refer to origin   
+    theperson.name = event.target.value;  //update theperson
+    const newPersonState = [...this.state.persons];  // to not refer to origin
+    newPersonState[personIndex] = theperson; //update array newpersons
+
+    this.setState({
+      persons : newPersonState
     })
   }
 
-  nameChanger = (event) => {
-    this.setState ({
-      persons : [
-        {name:"Super-Man",age:"200"},
-        {name:event.target.value,age:"250"},
-        {name:"Bat-Man",age:"50"}
-      ],
-      otherState : "value"
-    })
-  }
   toggelPersonHandler = () => {
     this.setState ({
-      showPerson : !this.state.showPerson
-      
+      showPerson : !this.state.showPerson     
     })
   }
+  
 
   render() {
-
+    const style = {
+      backgroundColor: 'yellow',
+      font: 'inherit',
+      border: '2px solid orange',
+      borderRadius : '10px',
+      padding : '8px',
+      cursor: 'pointer',
+      
+    }
     let persons=null;
     if(this.state.showPerson) {
       persons = (
-        <div >
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age}
+        <div>
+          {
+            this.state.persons.map( (person,index)=> {
+            return (
+              <Person 
+              key={person.id}
+              name={person.name}
+              age={person.age}
+              click={()=>{this.deletePersonHandler(index)}}
+              nameChanger={ (event)=>{this.nameChanger(event,person.id)} }
+              />
+                  )              
+            })
+          }
+          
+        </div>
             
-          />
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={()=>this.switchNameHandler('Dark-Seid')}
-            nameChanger={this.nameChanger}
-          />
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age} 
-          >This is the props.children</Person>
-        </div>  
       )
+      style.backgroundColor ='brown';
+      
+    }
+     
+    let classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+    if (this.state.persons.length <=1) {
+      classes.push('bold');
     }
     
     return (
+      
       <div className="App">
-        <h1>Boom! You looking for this</h1>
-        <button  onClick={()=> this.toggelPersonHandler()}>Switch</button>
+        <h1 className={classes.join(" ")}>Boom! You looking for this</h1>
+        <button  style={style}  onClick={()=> this.toggelPersonHandler()}>Switch Person</button>
         {persons}
       </div>
+      
     )
   }
 }
@@ -83,24 +108,4 @@ export default App;
 
 
 
-  /* constructor(props) {
-    super(props)
-
-    this.state = {
-      persons : [
-        {name:"SuperMan",age:"200"},
-        {name:"SuperGirl",age:"250"},
-        {name:"BatMan",age:"50"}
-      ],
-      otherState : "value"
-    }
-  } */
-
-  /* const style = {
-      backgroundColor: 'yellow',
-      font: 'inherit',
-      border: '2px solid orange',
-      borderRadius : '10px',
-      padding : '8px',
-      cursor: 'pointer'
-    } */
+  
