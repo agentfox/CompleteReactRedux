@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './person.css'
-const Person = (props) => {
+const person = (props) => {
     
     return (
         <div className={classes.Person} >
@@ -9,4 +9,4 @@ const Person = (props) => {
         </div>
     )
 };
-export default Person;
+export default person;

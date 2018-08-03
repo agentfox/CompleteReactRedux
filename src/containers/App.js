@@ -1,6 +1,7 @@
 import React from 'react'; 
 import classes from './App.css';
-import Person from './Person/person';
+import Persons from '../components/Person/Persons';
+import Cookpit from '../components/Cockpit/Cookpit'; 
 
 class App extends React.Component {
 
@@ -51,43 +52,28 @@ class App extends React.Component {
   render() {
     
     let persons=null;
-    let btnClass = '';
+    
     if(this.state.showPerson) {
       persons = (
         <div>
-          {
-            this.state.persons.map( (person,index)=> {
-            return (
-              <Person 
-              key={person.id}
-              name={person.name}
-              age={person.age}
-              click={()=>{this.deletePersonHandler(index)}}
-              nameChanger={ (event)=>{this.nameChanger(event,person.id)} }
-              />
-                  )              
-            })
-          }
-          
-        </div>
-            
+            <Persons 
+            persons = {this.state.persons}
+            click={this.deletePersonHandler}
+            nameChanger={this.nameChanger} 
+            /> 
+        </div>   
       )
-      btnClass= classes.red;
+     
     }
      
-    let assignedClasses = [];
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(classes.red);
-    }
-    if (this.state.persons.length <=1) {
-      assignedClasses.push(classes.bold);
-    }
-    
     return (
       
       <div className={classes.App}>
-        <h1 className={assignedClasses.join(" ")}>MY REACT</h1>
-        <button className={btnClass}  onClick={()=> this.toggelPersonHandler()}>Switch Person</button>
+        <Cookpit 
+        persons={this.state.persons}
+        toggle={this.toggelPersonHandler}
+        showPerson={this.state.showPerson}
+        />
         {persons}
       </div>
       
